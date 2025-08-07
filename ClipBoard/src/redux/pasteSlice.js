@@ -14,9 +14,9 @@ export const pasteSlice = createSlice({
       toast.success("Paste created successfully!");
     },
     removeFromPaste: (state, action) => {
-      state.paste = state.paste.filter(item => item.id !== action.payload.id)
+      state.paste = state.paste.filter(item => item._id !== action.payload)
       localStorage.setItem('paste', JSON.stringify(state.paste))
-      toast.success("Paste removed successfully!");
+      toast.success("Paste deleted successfully!");
     },
     resetAllPaste:(state)=>{
         state.paste = []
