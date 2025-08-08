@@ -24,7 +24,7 @@ export const pasteSlice = createSlice({
         toast.success("All pastes have been reset!");
     },
     UpdateFromPaste: (state, action) => {
-      const index = state.paste.findIndex(item => item.id === action.payload.id)
+      const index = state.paste.findIndex(item => item._id === action.payload._id)
       if (index !== -1) {
         state.paste[index] = action.payload
         localStorage.setItem('paste', JSON.stringify(state.paste))
