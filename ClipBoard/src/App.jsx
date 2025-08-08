@@ -9,23 +9,30 @@ import { createBrowserRouter } from 'react-router'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div>
-      <NavBar />
-      <Home /></div>,
+    element: (
+      <div className="min-h-screen">
+        <NavBar />
+        <Home />
+      </div>
+    ),
   },
   {
     path: '/paste',
-    element: <div>
-      <NavBar />
-      <Paste />
-    </div>,
+    element: (
+      <div className="min-h-screen">
+        <NavBar />
+        <Paste />
+      </div>
+    ),
   },
   {
     path: '/paste/:id',
-    element: <div>
-      <NavBar />
-      <ViewPaste />
-    </div>,
+    element: (
+      <div className="min-h-screen">
+        <NavBar />
+        <ViewPaste />
+      </div>
+    ),
   }
 ])
 function App() {
