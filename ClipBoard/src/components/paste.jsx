@@ -2,6 +2,7 @@ import React from "react";
 import { removeFromPaste, UpdateFromPaste } from "../redux/pasteSlice";
 import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
+import { NavLink } from "react-router-dom";
 const Paste = () => {
   const pastes = useSelector((state) => state.paste.paste);
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -36,22 +37,17 @@ const Paste = () => {
                 <p>{paste.content}</p>
               </div>
               <div className="flex justify-between mt-4">
-                <button
-                  onClick={() => {
-                    dispatch(UpdateFromPaste(paste?._id));
-                  }}
-                >
-                  Edit
+                <button>
+                  <NavLink to={`/?pasteId=${paste?._id}`}>Edit</NavLink>
                 </button>
                 <button>
-                  View
+                  <NavLink to={`/paste/${paste?._id}`}>View</NavLink>
                 </button>
                 <button
                   onClick={() => {
                     dispatch(removeFromPaste(paste?._id));
                   }}
                 >
-                
                   Delete
                 </button>
                 <button

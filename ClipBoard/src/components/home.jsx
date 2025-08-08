@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToPaste, UpdateFromPaste } from "../redux/pasteSlice";
 import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Home = () => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const pasteId = searchParams.get("pasteId");
+  const AllPastes = useSelector((state) => state.paste.paste);
   const dispatch = useDispatch();
   function createPaste() {
     const paste = {
@@ -24,13 +27,28 @@ const Home = () => {
     setValue("");
     setSearchParams({});
   }
+  useEffect(() => {
+    if (pasteId) {
+      const paste = AllPastes.find((p) => p._id === pasteId);
+      if (paste) {
+        setTitle(paste.title);
+        setValue(paste.content);
+      }
+    }
+
+    return () => {
+      setTitle("");
+      setValue("");
+    };
+  }, [pasteId, AllPastes]);
+
 
   return (
     <div className="flex flex-col items-center justify-center mt-7">
       <div className="flex flex-col justify-center gap-4">
         <input
           type="text"
-          className="p-2 bg-gray-900 rounded-md border-1 w-sm"
+          className="p-2 bg-gray-900 rounded-md border-1 w-[404px]"
           placeholder="Enter title here"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
